@@ -35,18 +35,18 @@ function drawBoard() {
                 if (j > 0 && j < 9) {
                     td.style.width = "50px";
                     td.style.height = "50px";
-                    td.style.backgroundColor = (((i + j) % 2) === 0) ? "#fff" : "#707070";
+                    td.style.backgroundColor = (((i + j) % 2) === 0) ? "#ffffff" : "#707070";
                     div=document.createElement("div");
                     div.innerHTML=chessLayout[i-1][j-1];
                     div.style.textAlign="center";
                     div.style.fontSize="40px";
-                    var outlineColor=(((i + j) % 2) === 0) ? "#000" : "#fff";
-                    div.style.color=(chessLayout[i-1][j-1].charCodeAt(6)>57)? "#0":"#fff";
+                    var outlineColor=(((i + j) % 2) === 0) ? "#000000" : "#ffffff";
+                    var isBlack=chessLayout[i-1][j-1].charCodeAt(6)>57;
+                    div.style.color=isBlack ? "#000000":"#ffffff";
                     div.style.textShadow="-1px -1px 0 "+ outlineColor+", 1px -1px 0 "+outlineColor+",-1px 1px 0 " +
                         outlineColor+", 1px 1px 0 "+ outlineColor;
-                    div.style.textShadow=(td.style.backgroundColor==="#707070" && div.style.color==="#0")?
-                        div.style.textShadow:(td.style.backgroundColor===div.style.color)?
-                            div.style.textShadow:""; //дикая конструкция - добавляет аутлайн для контраста.
+                    if (isBlack) div.style.textShadow=((((i + j) % 2) === 0))?"": div.style.textShadow;
+                    if (!isBlack) div.style.textShadow=((((i + j) % 2) === 0))? div.style.textShadow:"";
                     div.style.fontWeight="100";
                     td.appendChild(div);
                 }

@@ -42,10 +42,12 @@ function drawBoard() {
                     div.style.fontSize="40px";
                     var outlineColor=(((i + j) % 2) === 0) ? "#000" : "#fff";
                     div.style.color=(chessLayout[i-1][j-1].charCodeAt(6)>57)? "#0":"#fff";
-                    console.log(chessLayout[i-1][j-1].charCodeAt(6));
                     div.style.textShadow="-1px -1px 0 "+ outlineColor+", 1px -1px 0 "+outlineColor+",-1px 1px 0 " +
                         outlineColor+", 1px 1px 0 "+ outlineColor;
-                    div.style.fontWeight="600";
+                    div.style.textShadow=(td.style.backgroundColor==="#707070" && div.style.color==="#0")?
+                        div.style.textShadow:(td.style.backgroundColor===div.style.color)?
+                            div.style.textShadow:""; //дикая конструкция - добавляет аутлайн для контраста.
+                    div.style.fontWeight="100";
                     td.appendChild(div);
                 }
                 else {
@@ -68,6 +70,5 @@ function drawBoard() {
             tr.appendChild(td);
         }
     }
-    console.log(td.style);
     place.appendChild(chessBoard);
 }
